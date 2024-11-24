@@ -3,7 +3,7 @@ from decoder import decode
 from channel import send
 from encoder import encode
 
-def text_processor(F_q:list, q:int, p_e:float) -> None:
+def text_processor(F_q:list, p_e:float) -> None:
     text = "Hello\nI'm writing to you in regards to your recent comment about my country"
     text_vectors = text_to_vectors(text, F_q)
 

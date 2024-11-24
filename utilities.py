@@ -42,6 +42,9 @@ def text_to_vectors(text:str, F_q:list) -> list:
             encoded_c = hashed_values[ascii_digit]
         else:
             encoded_c = decimal_to_base(ascii_digit, len(F_q))
+            if len(encoded_c) < 12:
+                encoded_c = [0] * (12 - len(encoded_c)) + encoded_c
+
             hashed_values[ascii_digit] = encoded_c
 
         result.append(encoded_c)
@@ -59,9 +62,6 @@ def decimal_to_base(n:int, base:int) -> list:
     while n > 0:
         digits.append(n % base)
         n //= base
-
-    if len(digits) < 12:
-        digits += [0] * (12 - len(digits))
 
     digits.reverse()
     return digits
