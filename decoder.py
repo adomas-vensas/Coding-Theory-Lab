@@ -54,12 +54,7 @@ def add_control_coordinate(received_vector:list) -> list:
     w = received_vector.copy()
     weight = count_weight(w)
 
-    if weight % 2 != 0:
-        w.append(0)
-    else:
-        w.append(1)
-    
-    return w
+    return w + [0] if weight % 2 != 0 else w + [1]    
 
 
 def count_weight(vector):
