@@ -44,32 +44,32 @@ def show_image(pixels, image_size: tuple[int, int], ax, title: str) -> None:
 def scenario_1(converted_color, p_e:float, F_q:list) -> tuple[int, int, int]:
     (r, g, b) = converted_color
 
-    r = [0] * 11 + r
-    g = [0] * 11 + g
-    b = [0] * 11 + b
-
-    received_r, _ = send(r, p_e, F_q)
-    received_g, _ = send(g, p_e, F_q)
-    received_b, _ = send(b, p_e, F_q)
-    
-    decimal_r = base_to_decimal(received_r, len(F_q))
-    decimal_g = base_to_decimal(received_g, len(F_q))
-    decimal_b = base_to_decimal(received_b, len(F_q))
+    decimal_r = process_color_1(r, p_e, F_q)
+    decimal_g = process_color_1(g, p_e, F_q)
+    decimal_b = process_color_1(b, p_e, F_q)
 
     return (decimal_r, decimal_g, decimal_b)
+
+
+def process_color_1(rgb:list, p_e:float, F_q:list) -> int:
+    rgb = [0] * 11 + rgb
+    received_rgb, _ = send(rgb, p_e, F_q)
+    decimal_rgb = base_to_decimal(received_rgb, len(F_q))
+
+    return decimal_rgb
 
 
 def scenario_2(converted_color, p_e:float, F_q:list) -> tuple[int, int, int]:
     (r, g, b) = converted_color
 
-    decimal_r = process_color(r, p_e, F_q)
-    decimal_g = process_color(g, p_e, F_q)
-    decimal_b = process_color(b, p_e, F_q)
+    decimal_r = process_color_2(r, p_e, F_q)
+    decimal_g = process_color_2(g, p_e, F_q)
+    decimal_b = process_color_2(b, p_e, F_q)
 
     return (decimal_r, decimal_g, decimal_b)
 
 
-def process_color(converted_rgb:list, p_e:float, F_q:list) -> int:
+def process_color_2(converted_rgb:list, p_e:float, F_q:list) -> int:
     encoded_rgb = encode(converted_rgb, F_q)
     received_rgb, _ = send(encoded_rgb, p_e, F_q)
     decoded_rgb, msg1 = decode(received_rgb, F_q)
