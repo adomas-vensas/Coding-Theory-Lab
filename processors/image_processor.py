@@ -52,10 +52,8 @@ def scenario_1(converted_color, p_e:float, F_q:list) -> tuple[int, int, int]:
 
 
 def process_color_1(rgb:list, p_e:float, F_q:list) -> int:
-    rgb = [0] * 11 + rgb
     received_rgb, _ = send(rgb, p_e, F_q)
     decimal_rgb = base_to_decimal(received_rgb, len(F_q))
-
     return decimal_rgb
 
 
@@ -70,9 +68,14 @@ def scenario_2(converted_color, p_e:float, F_q:list) -> tuple[int, int, int]:
 
 
 def process_color_2(converted_rgb:list, p_e:float, F_q:list) -> int:
+    zero_amount = 12 - len(converted_rgb)
+    converted_rgb = [0] * zero_amount + converted_rgb
+
     encoded_rgb = encode(converted_rgb, F_q)
     received_rgb, _ = send(encoded_rgb, p_e, F_q)
     decoded_rgb, msg1 = decode(received_rgb, F_q)
+
+    decoded_rgb = [0] * zero_amount + decoded_rgb[zero_amount:]
 
     if msg1 is not None:
         print(msg1)

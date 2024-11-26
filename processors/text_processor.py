@@ -25,19 +25,21 @@ def text_processor(text:str, F_q:list, p_e:float) -> None:
 
     
 def scenario_1(regular_vector:list, p_e:float, F_q:list):
-    if len(regular_vector) < 23:
-        regular_vector = [0] * (23 - len(regular_vector)) + regular_vector
-
     received_vector, _ = send(regular_vector, p_e, F_q)
-    
     decoded_c = get_char(received_vector, F_q)
     return decoded_c
 
 
 def scenario_2(regular_vector:list, p_e:float, F_q:list):
+    zero_amount = 12 - len(regular_vector)
+
+    regular_vector = [0] * zero_amount + regular_vector
+
     encoded_vector = encode(regular_vector, F_q)
     received_vector, _ = send(encoded_vector, p_e, F_q)
     decoded_vector, msg = decode(received_vector, F_q)
+
+    decoded_vector = [0] * zero_amount + decoded_vector[zero_amount:]
 
     if msg is not None:
         print(msg)

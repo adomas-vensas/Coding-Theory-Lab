@@ -77,8 +77,8 @@ def decimal_to_base(n:int, base:int) -> list:
         digits.append(n % base)
         n //= base
 
-    if len(digits) < 12:
-        digits +=  [0] * (12 - len(digits)) 
+    # if len(digits) < 12:
+    #     digits +=  [0] * (12 - len(digits)) 
 
     digits.reverse()
     return digits
