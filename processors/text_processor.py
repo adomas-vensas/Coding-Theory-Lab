@@ -3,8 +3,7 @@ from decoder import decode
 from channel import send
 from encoder import encode
 
-def text_processor(F_q:list, p_e:float) -> None:
-    text = "Hello\nI'm writing to you in regards to your recent comment about my country"
+def text_processor(text:str, F_q:list, p_e:float) -> None:
     text_vectors = text_to_vectors(text, F_q)
 
     result_1, result_2 = "", ""
@@ -13,7 +12,9 @@ def text_processor(F_q:list, p_e:float) -> None:
         result_2 += scenario_2(i, p_e, F_q)
 
 
+    print("Original:")
     print(text)
+    
     print()
     print('Scenario 1:')
     print(result_1)

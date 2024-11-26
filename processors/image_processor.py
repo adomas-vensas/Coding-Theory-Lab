@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
 from PIL import Image
 from utilities import pixels_to_vectors, base_to_decimal
 from channel import send
@@ -8,12 +7,6 @@ from decoder import decode
 
 
 def image_processor(image_path:str, p_e:float, F_q:str) -> None:
-
-    # img = mpimg.imread(image_path)
-    # plt.imshow(img)
-    # plt.axis('off')  # Turn off axes for a cleaner display
-    # plt.show()
-
     img = Image.open(image_path)
     img = img.convert("RGB")
     pixels = list(img.getdata())
@@ -29,11 +22,23 @@ def image_processor(image_path:str, p_e:float, F_q:str) -> None:
         result_1.append(color_1)
         result_2.append(color_2)
 
+    _, axs = plt.subplots(1, 3, figsize=(15, 5))
+
+    show_image(pixels, img.size, axs[0], title='Original Image')
+    show_image(result_1, img.size, axs[1], title='Scenario 1')
+    show_image(result_2, img.size, axs[2], title='Scenario 2')
+
+    plt.tight_layout()
+    plt.show()
 
 
-    print(converted_pixels[210:300])
+def show_image(pixels, image_size: tuple[int, int], ax, title: str) -> None:
+    img = Image.new('RGB', image_size)
+    img.putdata(pixels)
 
-    pass
+    ax.imshow(img)
+    ax.axis('off')
+    ax.set_title(title)
 
 
 def scenario_1(converted_color, p_e:float, F_q:list) -> tuple[int, int, int]:
@@ -69,7 +74,7 @@ def scenario_2(converted_color, p_e:float, F_q:list) -> tuple[int, int, int]:
     decoded_g, msg2 = decode(received_g, F_q)
     decoded_b, msg3 = decode(received_b, F_q)
     
-    if msg1 != "" or msg2 != "" or msg3 != "":
+    if msg1 is not None or msg2 is not None or msg3 is not None:
         print(msg1, msg2, msg3)
         exit()
 
