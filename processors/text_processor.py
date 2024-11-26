@@ -31,12 +31,14 @@ def scenario_1(regular_vector:list, p_e:float, F_q:list):
 
 
 def scenario_2(regular_vector:list, p_e:float, F_q:list):
+    # Counting how many zeros are still needed to reach 12 digits
     zero_amount = 12 - len(regular_vector)
     regular_vector = [0] * zero_amount + regular_vector
 
     encoded_vector = encode(regular_vector, F_q)
     received_vector, _ = send(encoded_vector, p_e, F_q)
 
+    # Reseting the zeros that might have been randomized
     received_vector = [0] * zero_amount + received_vector[zero_amount:]
     decoded_vector, msg = decode(received_vector, F_q)
 

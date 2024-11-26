@@ -68,12 +68,14 @@ def scenario_2(converted_color, p_e:float, F_q:list) -> tuple[int, int, int]:
 
 
 def process_color_2(converted_rgb:list, p_e:float, F_q:list) -> int:
+    # Counting how many zeros are still needed to reach 12 digits
     zero_amount = 12 - len(converted_rgb)
     converted_rgb = [0] * zero_amount + converted_rgb
 
     encoded_rgb = encode(converted_rgb, F_q)
     received_rgb, _ = send(encoded_rgb, p_e, F_q)
 
+    # Reseting the zeros that might have been randomized
     received_rgb = [0] * zero_amount + received_rgb[zero_amount:]
     decoded_rgb, msg1 = decode(received_rgb, F_q)
 
