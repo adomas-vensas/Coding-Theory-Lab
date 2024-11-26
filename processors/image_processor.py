@@ -62,25 +62,21 @@ def scenario_1(converted_color, p_e:float, F_q:list) -> tuple[int, int, int]:
 def scenario_2(converted_color, p_e:float, F_q:list) -> tuple[int, int, int]:
     (r, g, b) = converted_color
 
-    encoded_r = encode(r, F_q)
-    encoded_g = encode(g, F_q)
-    encoded_b = encode(b, F_q)
-    
-    received_r, _ = send(encoded_r, p_e, F_q)
-    received_g, _ = send(encoded_g, p_e, F_q)
-    received_b, _ = send(encoded_b, p_e, F_q)
-
-    decoded_r, msg1 = decode(received_r, F_q)
-    decoded_g, msg2 = decode(received_g, F_q)
-    decoded_b, msg3 = decode(received_b, F_q)
-    
-    if msg1 is not None or msg2 is not None or msg3 is not None:
-        print(msg1, msg2, msg3)
-        exit()
-
-    decimal_r = base_to_decimal(decoded_r, len(F_q))
-    decimal_g = base_to_decimal(decoded_g, len(F_q))
-    decimal_b = base_to_decimal(decoded_b, len(F_q))
+    decimal_r = process_color(r, p_e, F_q)
+    decimal_g = process_color(g, p_e, F_q)
+    decimal_b = process_color(b, p_e, F_q)
 
     return (decimal_r, decimal_g, decimal_b)
+
+
+def process_color(converted_rgb:list, p_e:float, F_q:list) -> int:
+    encoded_rgb = encode(converted_rgb, F_q)
+    received_rgb, _ = send(encoded_rgb, p_e, F_q)
+    decoded_rgb, msg1 = decode(received_rgb, F_q)
+
+    if msg1 is not None:
+        print(msg1)
+        exit()
     
+    decimal_rgb = base_to_decimal(decoded_rgb, len(F_q))
+    return decimal_rgb
