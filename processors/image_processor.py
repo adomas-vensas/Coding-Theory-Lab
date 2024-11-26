@@ -73,9 +73,9 @@ def process_color_2(converted_rgb:list, p_e:float, F_q:list) -> int:
 
     encoded_rgb = encode(converted_rgb, F_q)
     received_rgb, _ = send(encoded_rgb, p_e, F_q)
-    decoded_rgb, msg1 = decode(received_rgb, F_q)
 
-    decoded_rgb = [0] * zero_amount + decoded_rgb[zero_amount:]
+    received_rgb = [0] * zero_amount + received_rgb[zero_amount:]
+    decoded_rgb, msg1 = decode(received_rgb, F_q)
 
     if msg1 is not None:
         print(msg1)
