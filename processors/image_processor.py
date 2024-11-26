@@ -52,10 +52,8 @@ def scenario_1(converted_color, p_e:float, F_q:list) -> tuple[int, int, int]:
 
 
 def process_color_1(rgb:list, p_e:float, F_q:list) -> int:
-    rgb = [0] * 11 + rgb
     received_rgb, _ = send(rgb, p_e, F_q)
     decimal_rgb = base_to_decimal(received_rgb, len(F_q))
-
     return decimal_rgb
 
 

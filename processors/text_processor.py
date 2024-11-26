@@ -25,11 +25,7 @@ def text_processor(text:str, F_q:list, p_e:float) -> None:
 
     
 def scenario_1(regular_vector:list, p_e:float, F_q:list):
-    if len(regular_vector) < 23:
-        regular_vector = [0] * (23 - len(regular_vector)) + regular_vector
-
     received_vector, _ = send(regular_vector, p_e, F_q)
-    
     decoded_c = get_char(received_vector, F_q)
     return decoded_c
 
