@@ -17,7 +17,7 @@ def vector_processor(vector:list, p_e:float, F_q:list) -> None:
     print(f'Error count: {len(error_pos)}')
     print(f'Error pos: {error_pos}')
 
-    edited_vector = edit_received_vector(received_vector, received_vector)
+    edited_vector = edit_received_vector(encoded_vector, received_vector)
     print(f'Edited vector:   {edited_vector}')
 
     decoded_vector, message = decode(edited_vector, F_q)
