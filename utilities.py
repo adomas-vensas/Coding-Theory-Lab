@@ -1,19 +1,4 @@
 
-def multiply_matrices(A:list, B:list) -> list[list]:
-    if len(A[0]) != len(B):
-        raise ValueError("Number of columns in A must be equal to the number of rows in B.")
-    
-    # Resultant matrix dimensions: rows of A x columns of B
-    result = [[0 for _ in range(len(B[0]))] for _ in range(len(A))]
-
-    # Manual matrix multiplication
-    for i in range(len(A)):  # Rows of A
-        for j in range(len(B[0])):  # Columns of B
-            for k in range(len(B)):  # Rows of B or Columns of A
-                result[i][j] += A[i][k] * B[k][j]
-    
-    return result
-
 
 def multiply_vector_with_matrix(A:list, B:list[list], F_q:list) -> list:
     if len(A) != len(B):
@@ -21,7 +6,6 @@ def multiply_vector_with_matrix(A:list, B:list[list], F_q:list) -> list:
     
     result = [0] * len(B[0])
 
-    # Perform the multiplication
     for j in range(len(B[0])):  # Loop through the columns of the matrix
         for i in range(len(A)):  # Loop through the elements of the vector
             result[j] += A[i] * B[i][j]
@@ -32,6 +16,8 @@ def multiply_vector_with_matrix(A:list, B:list[list], F_q:list) -> list:
 
 
 def pixels_to_vectors(pixels:list, F_q:list) -> list:
+    """ Convert image pixels to tuples of vectors of length 12. Return them in a list"""
+
     result = []
     hashed_values = {}
 
@@ -61,6 +47,8 @@ def pixels_to_vectors(pixels:list, F_q:list) -> list:
 
 
 def text_to_vectors(text:str, F_q:list) -> list:
+    """Convert text input to vectors of length 12 into a list."""
+
     result = []
     hashed_values = {}
 
@@ -79,7 +67,7 @@ def text_to_vectors(text:str, F_q:list) -> list:
 
 
 def decimal_to_base(n:int, base:int) -> list:
-    """Convert a decimal number to its representation in any base."""
+    """Convert a decimal number to its representation in any base. Return list of length 12"""
     
     if n == 0:
         return [0] * 12
@@ -97,6 +85,7 @@ def decimal_to_base(n:int, base:int) -> list:
 
 
 def base_to_decimal(num:list, base:int) -> int:
+    """Convert number in any base to decimal number."""
 
     decimal = 0
     for i, digit in enumerate(reversed(num)):

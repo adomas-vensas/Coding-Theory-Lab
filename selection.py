@@ -34,12 +34,12 @@ def main():
 
 
 def enter_selection() -> int:
-    choice = input("Enter only the option number and pres ENTER: ")
+    choice = input("Enter only the option number and press ENTER: ")
     regex = r"^[123]$"
 
     while not re.match(regex, choice):
         print("Incorrect input!")
-        choice = input("Enter only the option number and pres ENTER: ")
+        choice = input("Enter only the option number and press ENTER: ")
 
     print()
 
@@ -85,7 +85,7 @@ def text_selection(p_e:float) -> None:
     print("Enter any text in the ENGLISH letters, arabic numbers and punctuation marks and press SHIFT+ENTER:")
     
     user_input = ''
-    regex = r'^[A-Za-z0-9\n .,!?\'"-()]+$'
+    regex = r'^[A-Za-z0-9 .,!?\'"-()]+$'
 
     while True:
         line = input()
@@ -114,7 +114,7 @@ def image_selection(p_e:float) -> None:
     image_processor(image_path, p_e, F_q)
 
 
-def select_image():
+def select_image() -> str:
     root = tk.Tk()
     root.withdraw()
     root.attributes("-topmost", True)

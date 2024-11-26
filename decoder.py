@@ -3,6 +3,8 @@ from utilities import multiply_vector_with_matrix
 
 
 def decode(received_vector:list, F_q:list) -> tuple[list, str]:
+    """Decode provided vector of length 23."""
+
     w = add_control_coordinate(received_vector)
     
     s = multiply_vector_with_matrix(w, H, F_q)
