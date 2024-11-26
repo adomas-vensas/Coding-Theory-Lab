@@ -31,6 +31,35 @@ def multiply_vector_with_matrix(A:list, B:list[list], F_q:list) -> list:
     return result
 
 
+def pixels_to_vectors(pixels:list, F_q:list) -> list:
+    result = []
+    hashed_values = {}
+
+    for (r, g, b) in pixels:
+
+        if r in hashed_values:
+            encoded_r = hashed_values[r]
+        else:
+            encoded_r = decimal_to_base(r, len(F_q))
+            hashed_values[r] = encoded_r
+
+        if g in hashed_values:
+            encoded_g = hashed_values[g]
+        else:
+            encoded_g = decimal_to_base(g, len(F_q))
+            hashed_values[g] = encoded_g
+
+        if b in hashed_values:
+            encoded_b = hashed_values[b]
+        else:
+            encoded_b = decimal_to_base(b, len(F_q))
+            hashed_values[b] = encoded_b
+
+        result.append((encoded_r, encoded_g, encoded_b))
+
+    return result    
+
+
 def text_to_vectors(text:str, F_q:list) -> list:
     result = []
     hashed_values = {}
@@ -42,9 +71,6 @@ def text_to_vectors(text:str, F_q:list) -> list:
             encoded_c = hashed_values[ascii_digit]
         else:
             encoded_c = decimal_to_base(ascii_digit, len(F_q))
-            if len(encoded_c) < 12:
-                encoded_c = [0] * (12 - len(encoded_c)) + encoded_c
-
             hashed_values[ascii_digit] = encoded_c
 
         result.append(encoded_c)
@@ -56,12 +82,15 @@ def decimal_to_base(n:int, base:int) -> list:
     """Convert a decimal number to its representation in any base."""
     
     if n == 0:
-        return [0]
+        return [0] * 12
     
     digits = []
     while n > 0:
         digits.append(n % base)
         n //= base
+
+    if len(digits) < 12:
+        digits +=  [0] * (12 - len(digits)) 
 
     digits.reverse()
     return digits

@@ -3,7 +3,6 @@ from processors.vector_processor import vector_processor
 from processors.image_processor import image_processor
 
 F_q = [0,1]
-q = len(F_q)
 p_e = 0.01
 
 
