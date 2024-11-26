@@ -3,13 +3,15 @@ from processors.vector_processor import vector_processor
 from processors.image_processor import image_processor
 import re
 import keyboard
-
+import tkinter as tk
+from tkinter import filedialog
 
 F_q:list = [0,1]
 
 def main():
 
     print("Golay code implementation for Coding Theory Lab")
+    print("Adomas Vensas. Software Engineering. 4th course year, 2nd group")
     print()
     
     p_e = enter_probability()
@@ -61,7 +63,7 @@ def enter_probability() -> float:
             print("Not a number")
             number = input("Select an Error probability - a number in the interval [0,1]: ")
             continue
-    
+
 
 def vector_selection(p_e:float) -> None:
     print("Enter a 12 digit vector consisting only of {0, 1} and press ENTER:")
@@ -104,6 +106,27 @@ def text_selection(p_e:float) -> None:
 
 
 def image_selection(p_e:float) -> None:
-    # image_path = './processors/owl.png'
-    # image_processor(image_path, p_e, F_q)
-    pass
+    print("Select and image:")
+    image_path = select_image()
+
+    print("Image selected. Processing...")
+
+    image_processor(image_path, p_e, F_q)
+
+
+def select_image():
+    root = tk.Tk()
+    root.withdraw()
+    root.attributes("-topmost", True)
+
+    img_path = filedialog.askopenfilename(
+        title="Select an image",
+        filetypes=[
+            ("Image files", "*.png *.jpg *.jpeg")
+        ],
+        parent=root
+    )
+
+    root.destroy()
+    
+    return img_path
