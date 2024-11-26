@@ -98,10 +98,6 @@ def text_selection(p_e:float) -> None:
 
         user_input += '\n' + line
     
-    if len(user_input) == 0:
-        print("Text cannot be empty")
-        exit()
-
     text_processor(user_input, F_q, p_e)
 
 
