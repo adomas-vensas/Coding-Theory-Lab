@@ -16,6 +16,7 @@ def main():
     
     p_e = enter_probability()
 
+    print()
     print("Select an option:")
     print("1. Process binary vector")
     print("2. Process text")
