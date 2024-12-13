@@ -4,6 +4,7 @@ from utilities import multiply_vector_with_matrix
 
 def decode(received_vector:list, F_q:list) -> tuple[list, str]:
     """Decode provided vector of length 23."""
+    """Returns: decoded vector"""
 
     w = add_control_coordinate(received_vector)
     
@@ -23,6 +24,11 @@ def decode(received_vector:list, F_q:list) -> tuple[list, str]:
 
 
 def generate_result(w:list, u:list, F_q:list) -> list:
+    """
+    Add the w and u vectors and return the first 12 resulting vectors.
+    Returns: decoded vector
+    """
+    
     if len(w) != len(u):
         raise ValueError("List are not equal length")
 
@@ -36,6 +42,11 @@ def generate_result(w:list, u:list, F_q:list) -> list:
 
 
 def calculate_u(isFirst:bool, s: list, F_q:list) -> list:
+    """
+    Implements part of the decoding algorithm
+    Returns: u vector
+    """
+    
     if count_weight(s) <= 3:
         return s + [0] * 12 if isFirst else [0] * 12 + s
 
@@ -53,6 +64,11 @@ def calculate_u(isFirst:bool, s: list, F_q:list) -> list:
 
 
 def add_control_coordinate(received_vector:list) -> list:
+    """
+    Add a control coordinate to the end of the vector to maintain its weight as odd
+    Returns: vector with control coordinate
+    """
+    
     w = received_vector.copy()
     weight = count_weight(w)
 
@@ -60,6 +76,11 @@ def add_control_coordinate(received_vector:list) -> list:
 
 
 def count_weight(vector):
+    """
+    Count vector weight
+    Returns: vector weight
+    """
+    
     weight = 0
     
     for i in vector:

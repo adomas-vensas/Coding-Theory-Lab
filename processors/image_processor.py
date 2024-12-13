@@ -7,9 +7,14 @@ from decoder import decode
 
 
 def image_processor(image_path:str, p_e:float, F_q:str) -> None:
+    """
+    Processes image input
+    """
+    
+    #Prepare image for processing
     img = Image.open(image_path)
     img = img.convert("RGB")
-    pixels = list(img.getdata())
+    pixels = list(img.getdata()) #Extract image colors - tuples (R, G, B)
     
     converted_pixels = pixels_to_vectors(pixels, F_q)
     result_1, result_2 = [], []
@@ -33,6 +38,10 @@ def image_processor(image_path:str, p_e:float, F_q:str) -> None:
 
 
 def show_image(pixels, image_size: tuple[int, int], ax, title: str) -> None:
+    """
+    Shows the result image
+    """
+    
     img = Image.new('RGB', image_size)
     img.putdata(pixels)
 
@@ -42,6 +51,11 @@ def show_image(pixels, image_size: tuple[int, int], ax, title: str) -> None:
 
 
 def scenario_1(converted_color, p_e:float, F_q:list) -> tuple[int, int, int]:
+    """
+    Executing the first exercise scenario (no encoding)
+    Returns: color list
+    """
+
     (r, g, b) = converted_color
 
     decimal_r = process_color_1(r, p_e, F_q)
@@ -52,12 +66,22 @@ def scenario_1(converted_color, p_e:float, F_q:list) -> tuple[int, int, int]:
 
 
 def process_color_1(rgb:list, p_e:float, F_q:list) -> int:
+    """
+    Sends and converts individual color values and converts to decimal base
+    Returns: Individual color value
+    """
+    
     received_rgb, _ = send(rgb, p_e, F_q)
     decimal_rgb = base_to_decimal(received_rgb, len(F_q))
     return decimal_rgb
 
 
 def scenario_2(converted_color, p_e:float, F_q:list) -> tuple[int, int, int]:
+    """
+    Executing the second exercise scenario (with encoding)
+    Returns: color list
+    """
+    
     (r, g, b) = converted_color
 
     decimal_r = process_color_2(r, p_e, F_q)
@@ -68,6 +92,11 @@ def scenario_2(converted_color, p_e:float, F_q:list) -> tuple[int, int, int]:
 
 
 def process_color_2(converted_rgb:list, p_e:float, F_q:list) -> int:
+    """
+    Encodes, sends, decodes and converts individual color values and converts to decimal base 
+    Returns: Individual color value
+    """
+
     # Counting how many zeros are still needed to reach 12 digits
     zero_amount = 12 - len(converted_rgb)
     converted_rgb = [0] * zero_amount + converted_rgb

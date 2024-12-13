@@ -1,6 +1,10 @@
 
 
 def multiply_vector_with_matrix(A:list, B:list[list], F_q:list) -> list:
+    """
+    Multiplies a 1D vector with a NxM matrix
+    Returns: resulting vector
+    """
     if len(A) != len(B):
         raise ValueError("Number of columns in A must be equal to the number of rows in B.")
     
@@ -16,7 +20,10 @@ def multiply_vector_with_matrix(A:list, B:list[list], F_q:list) -> list:
 
 
 def pixels_to_vectors(pixels:list, F_q:list) -> list:
-    """ Convert image pixels to tuples of vectors of length 12. Return them in a list"""
+    """
+    Convert image pixels to tuples of vectors of length 12.
+    Returns: vectors (R, G, B) in a list
+    """
 
     result = []
     hashed_values = {}
@@ -67,7 +74,9 @@ def text_to_vectors(text:str, F_q:list) -> list:
 
 
 def decimal_to_base(n:int, base:int) -> list:
-    """Convert a decimal number to its representation in any base. Return list of length 12"""
+    """
+    Convert a decimal number to its representation in any base. Return list of length 12
+    """
     
     if n == 0:
         return [0] * 12
@@ -85,7 +94,10 @@ def decimal_to_base(n:int, base:int) -> list:
 
 
 def base_to_decimal(num:list, base:int) -> int:
-    """Convert number in any base to decimal number."""
+    """
+    Convert number in any base to decimal number.
+    Returns: decimal number
+    """
 
     decimal = 0
     for i, digit in enumerate(reversed(num)):

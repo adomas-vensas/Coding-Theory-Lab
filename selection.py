@@ -9,6 +9,10 @@ from tkinter import filedialog
 F_q:list = [0,1]
 
 def main():
+    """
+    Choosing the probability of errors, and whether we want to work with vectors
+    text or images.
+    """
 
     print("Golay code implementation for Coding Theory Lab")
     print("Adomas Vensas. Software Engineering. 4th course year, 2nd group")
@@ -35,6 +39,11 @@ def main():
 
 
 def enter_selection() -> int:
+    """
+    Choosing image, text or vector processing.
+    Returns: 1, 2 or 3 selection
+    """
+
     choice = input("Enter only the option number and press ENTER: ")
     regex = r"^[123]$"
 
@@ -48,6 +57,11 @@ def enter_selection() -> int:
 
 
 def enter_probability() -> float:
+    """
+    Entering the error probability
+    Returns: probability
+    """
+
     number = input("Select an Error probability - a number in the interval [0, 1]: ")
 
     while True:
@@ -67,6 +81,10 @@ def enter_probability() -> float:
 
 
 def vector_selection(p_e:float) -> None:
+    """
+    Entering the vector
+    """
+
     print("Enter a 12 digit vector consisting only of {0, 1} and press ENTER:")
     user_input = input()
 
@@ -83,6 +101,10 @@ def vector_selection(p_e:float) -> None:
 
 
 def text_selection(p_e:float) -> None:
+    """
+    Entering the text
+    """
+
     print("Enter any text in the ENGLISH letters, arabic numbers and punctuation marks and press SHIFT+ENTER:")
     
     user_input = ''
@@ -103,6 +125,10 @@ def text_selection(p_e:float) -> None:
 
 
 def image_selection(p_e:float) -> None:
+    """
+    Selecting image 
+    """
+
     print("Select and image:")
     image_path = select_image()
 
@@ -112,6 +138,11 @@ def image_selection(p_e:float) -> None:
 
 
 def select_image() -> str:
+    """
+    Invoking image selection dialog
+    Returns: image path
+    """
+
     root = tk.Tk()
     root.withdraw()
     root.attributes("-topmost", True)

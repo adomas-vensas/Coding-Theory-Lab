@@ -2,6 +2,11 @@ import random
 
 
 def send(encoded_vector:list, p_e:float, F_q:list) -> tuple[list, list]:
+    """
+    Channel implementation
+    Returns: received vector with potential errors
+    """
+    
     received_vector = []
     error_pos = []
 

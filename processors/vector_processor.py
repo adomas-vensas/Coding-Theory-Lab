@@ -8,6 +8,10 @@ import tkinter as tk
 from tkinter import simpledialog, messagebox
 
 def vector_processor(vector:list, p_e:float, F_q:list) -> None:
+    """
+    Processes vector input
+    """
+    
     encoded_vector = encode(vector, F_q)
 
     print(f'Encoded vector:  {encoded_vector}')
@@ -34,6 +38,11 @@ def vector_processor(vector:list, p_e:float, F_q:list) -> None:
 
 
 def edit_received_vector(original_vector:list, vector:list) -> list:
+    """
+    Opens a dialog to edit the received from channel vector
+    Returns: the edited vector
+    """
+    
     root = tk.Tk()
     root.withdraw()
     root.attributes("-topmost", True)

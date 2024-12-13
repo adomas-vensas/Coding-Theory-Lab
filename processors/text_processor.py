@@ -6,6 +6,10 @@ from encoder import encode
 import keyboard
 
 def text_processor(text:str, F_q:list, p_e:float) -> None:
+    """
+    Processes text input
+    """
+
     text_vectors = text_to_vectors(text, F_q)
 
     result_1, result_2 = "", ""
@@ -30,12 +34,21 @@ def text_processor(text:str, F_q:list, p_e:float) -> None:
 
     
 def scenario_1(regular_vector:list, p_e:float, F_q:list):
+    """
+    Execute the first scenario of the exercise (no encoding)
+    Returns: decoded character
+    """
     received_vector, _ = send(regular_vector, p_e, F_q)
     decoded_c = get_char(received_vector, F_q)
     return decoded_c
 
 
 def scenario_2(regular_vector:list, p_e:float, F_q:list):
+    """
+    Executes the second scenario of the exercise (with encoding)
+    Returns: decoded character
+    """
+
     # Counting how many zeros are still needed to reach 12 digits
     zero_amount = 12 - len(regular_vector)
     regular_vector = [0] * zero_amount + regular_vector
@@ -56,6 +69,11 @@ def scenario_2(regular_vector:list, p_e:float, F_q:list):
 
 
 def get_char(vector:list, F_q:list):
+    """
+    Converts vector expression to the equivalent character
+    Returns: ascii character
+    """
+    
     decimal_c = base_to_decimal(vector, len(F_q))
 
     if 0 <= decimal_c <= 128:
