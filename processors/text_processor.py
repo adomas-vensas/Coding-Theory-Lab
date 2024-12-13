@@ -3,6 +3,8 @@ from decoder import decode
 from channel import send
 from encoder import encode
 
+import keyboard
+
 def text_processor(text:str, F_q:list, p_e:float) -> None:
     text_vectors = text_to_vectors(text, F_q)
 
@@ -22,6 +24,9 @@ def text_processor(text:str, F_q:list, p_e:float) -> None:
     print()
     print('Scenario 2:')
     print(result_2)
+
+    print("Press ESC to quit...")
+    keyboard.wait('esc')
 
     
 def scenario_1(regular_vector:list, p_e:float, F_q:list):

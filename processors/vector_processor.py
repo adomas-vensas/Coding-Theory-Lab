@@ -3,6 +3,7 @@ from channel import send
 from encoder import encode
 
 import re
+import keyboard
 import tkinter as tk
 from tkinter import simpledialog, messagebox
 
@@ -27,6 +28,9 @@ def vector_processor(vector:list, p_e:float, F_q:list) -> None:
         exit()
     print(f'Given vector:    {vector}')
     print(f'Decoded vector:  {decoded_vector}')
+
+    print("Press ESC to quit...")
+    keyboard.wait('esc')
 
 
 def edit_received_vector(original_vector:list, vector:list) -> list:
